@@ -13,6 +13,8 @@
         <jetty.version>9.0.7.v20131107</jetty.version>
         <org.json.version>20141113</org.json.version>
         <spring.version>4.0.3.RELEASE</spring.version>
+        <hibernate.version>4.2.7.Final</hibernate.version>
+        <genericdao.version>1.2.0</genericdao.version>
     </properties>
 
     <dependencies>
@@ -103,6 +105,53 @@
             <artifactId>spring-context-support</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <!-- JPA/Hibernate-->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.1.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <!-- This first dependency includes all the JPA implementations for the
+            DAOs -->
+        <dependency>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>dao</artifactId>
+            <version>${genericdao.version}</version>
+        </dependency>
+        <!-- This second one includes the Hibernate Entity Manager plugin for the
+            framework -->
+        <dependency>
+            <groupId>com.googlecode.genericdao</groupId>
+            <artifactId>search-jpa-hibernate</artifactId>
+            <version>${genericdao.version}</version>
+        </dependency>
+
+        <!-- MySQL JDBC connector -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.27</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.14.8</version>
+            <scope>provided</scope>
+        </dependency>
+
     </dependencies>
     <build>
         <plugins>
