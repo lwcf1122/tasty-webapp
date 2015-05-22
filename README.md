@@ -1,3 +1,3 @@
 # tasty-webservice
 
-RESTful web service for food ordering.
+RESTful web service for food ordering and management.
