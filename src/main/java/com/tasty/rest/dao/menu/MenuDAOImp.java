@@ -1,8 +1,10 @@
 package com.tasty.rest.dao.menu;
 
 import com.googlecode.genericdao.dao.jpa.GenericDAOImpl;
+import com.googlecode.genericdao.search.jpa.JPASearchProcessor;
 import com.tasty.rest.entity.MenuDO;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +22,12 @@ public class MenuDAOImp extends GenericDAOImpl<MenuDO, Integer> implements MenuD
     @Qualifier(value="entityManagerFactory")
     public void setEntityManager(EntityManager entityManager) {
         super.setEntityManager(entityManager);
+    }
+
+    @Override
+    @Autowired
+    @Qualifier(value="searchProcessor")
+    public void setSearchProcessor(JPASearchProcessor searchProcessor) {
+        super.setSearchProcessor(searchProcessor);
     }
 }

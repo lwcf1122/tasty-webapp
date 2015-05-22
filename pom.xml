@@ -7,7 +7,7 @@
     <groupId>com.tasty</groupId>
     <artifactId>tasty-app</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <name>tasty-webservice</name>
     <properties>
         <jersey.version>2.9</jersey.version>
         <jetty.version>9.0.7.v20131107</jetty.version>
@@ -150,6 +150,32 @@
             <artifactId>lombok</artifactId>
             <version>1.14.8</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <version>1.7.5</version>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.8.1</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

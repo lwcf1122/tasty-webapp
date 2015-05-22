@@ -3,6 +3,7 @@ package com.tasty.rest.entity;
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,9 +26,10 @@ public class MenuDO {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
-    private Integer id;
+    private Integer itemId;
 
     @Column(name = "name", nullable = false, length = 255)
+    @NotNull
     @Getter
     @Setter
     private String name;
@@ -38,16 +40,19 @@ public class MenuDO {
     private String description;
 
     @Column(name = "price", nullable = false)
+    @NotNull
     @Getter
     @Setter
     private Double price;
 
     @Column(name = "status", nullable = false)
+    @NotNull
     @Getter
     @Setter
     private Integer status;
 
     @Column(name = "type", nullable = false)
+    @NotNull
     @Getter
     @Setter
     private Integer type;
@@ -58,6 +63,7 @@ public class MenuDO {
     private String note;
 
     @Column(name = "created_at", nullable = false)
+    @NotNull
     @Getter
     @Setter
     private Date createdAt;
