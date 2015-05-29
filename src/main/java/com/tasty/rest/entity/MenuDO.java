@@ -1,5 +1,7 @@
 package com.tasty.rest.entity;
 
+import org.hibernate.annotations.Where;
+
 import java.util.Date;
 
 import javax.persistence.*;
@@ -15,10 +17,11 @@ import lombok.ToString;
  * Created by flao on 5/19/15.
  */
 @Entity
-@Table(name = "menu", schema = "tasty")
+@Table(name = "menu", catalog = "tasty")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Where(clause = "status <> '0'")
 public class MenuDO {
 
     @Column(name = "item_id", unique = true, nullable = false)
@@ -26,7 +29,7 @@ public class MenuDO {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter
     @Setter
-    private Integer itemId;
+    private Integer id;
 
     @Column(name = "name", nullable = false, length = 255)
     @NotNull
@@ -40,19 +43,16 @@ public class MenuDO {
     private String description;
 
     @Column(name = "price", nullable = false)
-    @NotNull
     @Getter
     @Setter
     private Double price;
 
     @Column(name = "status", nullable = false)
-    @NotNull
     @Getter
     @Setter
     private Integer status;
 
     @Column(name = "type", nullable = false)
-    @NotNull
     @Getter
     @Setter
     private Integer type;
@@ -62,8 +62,7 @@ public class MenuDO {
     @Setter
     private String note;
 
-    @Column(name = "created_at", nullable = false)
-    @NotNull
+    @Column(name = "created_at", nullable = false, updatable=false)
     @Getter
     @Setter
     private Date createdAt;
@@ -73,4 +72,15 @@ public class MenuDO {
     @Setter
     private Date updatedAt;
 
+    @PrePersist
+    protected void onCreate() {
+        this.status = 1;
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate(){
+        this.updatedAt = new Date();
+    }
 }

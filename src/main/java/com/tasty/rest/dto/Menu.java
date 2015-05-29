@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import com.fasterxml.jackson.annotation.JsonView;
+import com.tasty.rest.common.View;
 
 import org.springframework.stereotype.Component;
 
@@ -31,19 +32,26 @@ import lombok.ToString;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Menu {
 
-    @NotNull
-    private Integer itemId;
+    @JsonView({View.GetResponse.class, View.PostResponse.class})
+    private Integer id;
 
-    @Size
+//    @Size
+    @JsonView(View.GetResponse.class)
     private String name;
 
+    @JsonView(View.GetResponse.class)
     private String description;
 
+    @JsonView(View.GetResponse.class)
     private Double price;
 
+    @JsonView(View.GetResponse.class)
     private Integer status;
 
+    @NotNull
+    @JsonView(View.GetResponse.class)
     private Integer type;
 
+    @JsonView(View.GetResponse.class)
     private String note;
 }

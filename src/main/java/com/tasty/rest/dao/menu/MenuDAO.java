@@ -11,4 +11,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MenuDAO extends GenericDAO<MenuDO, Integer> {
 
+    public void delete(Integer id) throws Exception;
 }

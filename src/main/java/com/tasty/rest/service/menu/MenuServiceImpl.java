@@ -1,10 +1,10 @@
 package com.tasty.rest.service.menu;
 
+import com.tasty.rest.common.enums.ServiceOperation;
 import com.tasty.rest.dao.menu.MenuDAO;
 import com.tasty.rest.dto.Menu;
 import com.tasty.rest.entity.MenuDO;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,18 +37,46 @@ public class MenuServiceImpl implements MenuService {
     public Menu findById(Integer id) throws Exception {
         MenuDO menuDO = menuDAO.find(id);
         if (menuDO == null) throw new WebApplicationException(Response.Status.NOT_FOUND); //TODO move to abstract/base
-        Menu menuDTO = new Menu();
-        menuDTO = mapper.mapDOToDTO(menuDO, menuDTO);
+        Menu menuDTO = mapper.mapToDTO(menuDO, ServiceOperation.GET);
         return menuDTO;
     }
 
     @Override
     public Map<String, List<Menu>> findAll() throws Exception {
         List<MenuDO> menuDOList = menuDAO.findAll();
-        List<Menu> menuDTOList = mapper.mapDOToDTO(menuDAO.findAll());
+        List<Menu> menuDTOList = mapper.mapToDTO(menuDOList, ServiceOperation.GET);
         Map<String, List<Menu>> map = new HashMap<String, List<Menu>>();
         map.put(getPluralizeJsonRootName(constructJsonRoot(menuDTOList.get(0).getClass())), menuDTOList); //TODO move to abstract/base
         return map;
+    }
+
+    @Override
+    public Menu add(Menu menuDTO) throws Exception {
+        //validate DTO
+        if (menuDTO == null) throw new WebApplicationException(Response.Status.BAD_REQUEST); //TODO move to abstract/base
+        menuDTO.setId(null);
+        MenuDO menuDO = mapper.mapToDO(menuDTO, ServiceOperation.ADD);
+        menuDO = menuDAO.save(menuDO);
+        return mapper.mapToDTO(menuDO, ServiceOperation.ADD);
+    }
+
+    @Override
+    public void update(Integer id, Menu menuDTO) throws Exception {
+        if (menuDTO == null) throw new WebApplicationException(Response.Status.BAD_REQUEST); //TODO move to abstract/base
+        menuDTO.setId(id);
+        //validate DTO
+        MenuDO oldDo = menuDAO.find(id);
+        if (oldDo == null) throw new WebApplicationException(Response.Status.BAD_REQUEST); //TODO move to abstract/base
+        MenuDO toUpdateDO = mapper.mapToDO(menuDTO, ServiceOperation.UPDATE);
+        MenuDO updatedDO = menuDAO.merge(toUpdateDO);
+        if (updatedDO == null) throw new WebApplicationException(Response.Status.BAD_REQUEST); //TODO move to abstract/base
+    }
+
+    @Override
+    public void delete(Integer id) throws Exception {
+        if (id == null || id <= 0) throw new WebApplicationException(Response.Status.BAD_REQUEST); //TODO move to abstract/base
+        if (menuDAO.find(id) == null) throw new WebApplicationException(Response.Status.BAD_REQUEST); //TODO move to abstract/base
+        menuDAO.delete(id);
     }
 
     private String getPluralizeJsonRootName(String rootName) {
