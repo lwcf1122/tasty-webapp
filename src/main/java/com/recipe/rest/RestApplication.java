@@ -1,4 +1,4 @@
-package com.tasty.rest;
+package com.recipe.rest;
 
 import org.glassfish.jersey.server.ResourceConfig;
 
@@ -11,7 +11,7 @@ public class RestApplication extends ResourceConfig {
      * Register JAX-RS application components.
      */
     public RestApplication() {
-        packages("com.tasty.rest");
+        packages("com.recipe.rest");
     }
 
 }

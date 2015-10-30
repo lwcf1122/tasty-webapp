@@ -21,18 +21,18 @@
         <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>javax.ws.rs.Application</param-name>
-            <param-value>com.tasty.rest.RestApplication</param-value>
+            <param-value>com.recipe.rest.RestApplication</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
         <servlet-name>jersey-servlet</servlet-name>
-        <url-pattern>/tasty-webservice/rest/*</url-pattern>
+        <url-pattern>/recipe/rest/api/*</url-pattern>
     </servlet-mapping>
 
     <resource-ref>
-        <description>Database resource for tasty </description>
-        <res-ref-name>jdbc/restTastyDB</res-ref-name>
+        <description>Database resource for recipe </description>
+        <res-ref-name>jdbc/recipeDB</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
         <res-auth>Container</res-auth>
     </resource-ref>

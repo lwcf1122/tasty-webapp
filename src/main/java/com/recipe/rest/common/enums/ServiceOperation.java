@@ -1,4 +1,4 @@
-package com.tasty.rest.common.enums;
+package com.recipe.rest.common.enums;
 
 /**
  * Created by flao on 5/22/15.

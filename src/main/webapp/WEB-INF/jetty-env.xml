@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configure class="org.eclipse.jetty.webapp.WebAppContext">
-    <New id="tastyDS" class="org.eclipse.jetty.plus.jndi.Resource">
+    <New id="recipeDS" class="org.eclipse.jetty.plus.jndi.Resource">
         <Arg></Arg>
-        <Arg>jdbc/restTastyDB</Arg>
+        <Arg>jdbc/recipeDB</Arg>
         <Arg>
             <New class="com.mysql.jdbc.jdbc2.optional.MysqlConnectionPoolDataSource">
                 <Set name="Url">jdbc:mysql://localhost:3306</Set>

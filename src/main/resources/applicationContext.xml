@@ -19,7 +19,7 @@
 
     <context:annotation-config />
     <context:component-scan
-            base-package="com.tasty.rest.resource,com.tasty.rest.dao,com.tasty.rest.entity,com.tasty.rest.service" />
+            base-package="com.recipe.rest.resource,com.recipe.rest.dao,com.recipe.rest.entity,com.recipe.rest.service" />
     <context:annotation-config/>
 
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
@@ -29,9 +29,9 @@
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="persistenceXmlLocation" value="classpath:persistence.xml" />
-        <property name="persistenceUnitName" value="tastyRestPersistence" />
-        <property name="dataSource" ref="tastyDemoDS" />
-        <property name="packagesToScan" value="com.tasty.rest.entity" />
+        <property name="persistenceUnitName" value="recipeRestPersistence" />
+        <property name="dataSource" ref="recipeDemoDS" />
+        <property name="packagesToScan" value="com.recipe.rest.entity" />
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
@@ -48,9 +48,9 @@
         </property>
     </bean>
 
-    <bean id="tastyDemoDS" class="org.springframework.jndi.JndiObjectFactoryBean"
+    <bean id="recipeDemoDS" class="org.springframework.jndi.JndiObjectFactoryBean"
           scope="singleton">
-        <property name="jndiName" value="java:comp/env/jdbc/restTastyDB" />
+        <property name="jndiName" value="java:comp/env/jdbc/recipeDB" />
         <property name="resourceRef" value="true" />
     </bean>
 
